@@ -119,7 +119,7 @@
                 </h2>
             </div>
             <div class="popup__wrapper">
-                <form action="create-film" method="post" accept-charset="utf-8">
+                <form action="create-film" method="post" accept-charset="utf-8" enctype="multipart/form-data">
                     @csrf
                     <div class="popup__container">
                         <div class="popup__poster"></div>
@@ -149,8 +149,8 @@
                     <div class="conf-step__buttons text-center">
                         <input type="submit" value="Добавить фильм" class="conf-step__button conf-step__button-accent"
                             data-event="film_add">
-                        <input type="submit" value="Загрузить постер"
-                            class="conf-step__button conf-step__button-accent">
+                        <!-- Поле загрузки картинки фильма -->
+                        <input type="file" value="Загрузить постер" name="poster" id="poster" accept="image/*" class="conf-step__button conf-step__button-accent">
                         <button class="conf-step__button conf-step__button-regular" type="button">Отменить</button>
                     </div>
                 </form>
