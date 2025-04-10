@@ -84,7 +84,7 @@
 </section>
 
 <!-- Если попали на странице с ошибкой, то отобразится Попап  "Ошибка Диапазоны сеансов пересекаются" -->
-@if(request()->has('error'))    
+@if(request()->has('error'))
     <div class="popup active">
         <div class="popup__container">
             <div class="popup__content">
@@ -150,7 +150,8 @@
                         <input type="submit" value="Добавить фильм" class="conf-step__button conf-step__button-accent"
                             data-event="film_add">
                         <!-- Поле загрузки картинки фильма -->
-                        <input type="file" value="Загрузить постер" name="poster" id="poster" accept="image/*" class="conf-step__button conf-step__button-accent">
+                        <input type="file" value="Загрузить постер" name="poster" id="poster" accept="image/*"
+                            class="conf-step__button conf-step__button-accent">
                         <button class="conf-step__button conf-step__button-regular" type="button">Отменить</button>
                     </div>
                 </form>
@@ -227,7 +228,36 @@
     </div>
 </div>
 
+<!-- Попап удалить фильм  -->
+<div class="popup" id="delete-film">
+    <div class="popup__container">
+        <div class="popup__content">
+            <div class="popup__header">
+                <h2 class="popup__title">
+                    Удаление фильма
+                    <a class="popup__dismiss" href="#"><img src="i/admin/close.png" alt="Закрыть"></a>
+                </h2>
+            </div>
+            <div class="popup__wrapper">
+                <form action="/delete-film" method="post" accept-charset="utf-8">
+                    @csrf
+                    <!-- @method('DELETE') -->
+                    <p class="conf-step__paragraph">Вы действительно хотите удалить фильм <span
+                            id="nameFilmDelete">"Название фильма"</span>?</p>
+                    <!-- В span будет подставляться название фильма -->
+                    <div class="conf-step__buttons text-center">
+                        <input type="hidden" name="idFilmDelete" value="">
+                        <input type="submit" value="Удалить" class="conf-step__button conf-step__button-accent">
+                        <button class="conf-step__button conf-step__button-regular" type="button">Отменить</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script src="{{ asset('js/configuration_of_sessions.js') }}"></script>
+
 
 
 

@@ -45,4 +45,15 @@ class FilmController extends Controller
         // return view('admin.index', compact('films'));
         return response()->json($films);
     }
+
+    //Метод удаления фильма по id
+    public function deleteFilm(Request $request) 
+    {
+        $idFilm = $request->input('idFilmDelete');
+        $film = Film::findOrFail($idFilm);
+
+        $film->delete(); 
+
+        return redirect()->back()->with('success', 'Фильм успешно удалён.');
+    }
 }

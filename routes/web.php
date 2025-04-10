@@ -66,5 +66,9 @@ Route::post('create-session', [SessionController::class, 'createSession']);
 //Маршрут получаения всех сеансов в зале по id зала
 Route::get('/api/halls/{hallId}/seanses', [App\Http\Controllers\SessionController::class, 'getSeansesByHallId']);
 
-//Универсальный роутер удаления
+//Маршрут удаления фильма
 Route::post('/delete-session', [SessionController::class, 'deleteSession']);
+
+//Маршрут Удаление фильма 
+Route::post('delete-film',[FilmController::class, 'deleteFilm']);
+// Route::delete('/delete-film/{film}', [FilmController::class, 'destroy'])->name('film.destroy');

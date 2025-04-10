@@ -106,7 +106,10 @@ function displayFilms(arrayfilms) {
         filmsWrapper.appendChild(htmlFilm);
 
         //На каждую иконку фильма вешаем слушатель запуска функции openEditSessions открывания своего поля редактирования сеансов
-        htmlFilm.addEventListener('click', openEditSessions);
+        // htmlFilm.addEventListener('click', openEditSessions);
+
+        //Добавить слушатель удалить фильм !!!!!!!!!!!!!!!!!!!!!!
+        htmlFilm.addEventListener('click', openPopupDeleteFilm);
     });
 }
 
@@ -118,7 +121,7 @@ function openEditSessions(event) {
     popupSessionActive();
 
     //Вешаем слушатель на крестик закрытие попап окна "Добавление сеанса"
-   // const buttonDismissSessionUpPopup = document.getElementById('dismiss-session-button');
+    // const buttonDismissSessionUpPopup = document.getElementById('dismiss-session-button');
     //buttonDismissSessionUpPopup.addEventListener('click', popupSessionActive);
 }
 
@@ -215,7 +218,6 @@ async function displaySeancesTimeline(allHallFromDataBase) {
                 //Вешаем удаление сеанса
                 htmlSeancesMovie.addEventListener('click', deleteSeans);
 
-
                 hallSeancesTimeline.appendChild(htmlSeancesMovie);
             }
 
@@ -223,7 +225,8 @@ async function displaySeancesTimeline(allHallFromDataBase) {
             console.error(`Ошибка при получении сеансов для зала ${el.name}:`, error);
         }
 
-        //Делаем проверку совместимости сеансов
+        //На каждую временную шкалу вешаем слушатель запуска функции openEditSessions открывания попапа "Добавить сеанс"
+        htmlWrpSeancesTimeline.addEventListener('click', openEditSessions);
 
         htmlWrpSeancesTimeline.appendChild(wrphallSeancesTimeline);
     };
@@ -300,7 +303,7 @@ function deleteSeans(event) {
     // console.log(document.querySelector('input[name="timeSeansDelete"]'));
 
     //Вешаем слушатель на крестик закрытие попап окна "Удаление сеанса"
-   // const buttonDismissSessionUpPopup = document.getElementById('dismiss-delete-session-button');
+    // const buttonDismissSessionUpPopup = document.getElementById('dismiss-delete-session-button');
     //buttonDismissSessionUpPopup.addEventListener('click', popupDeleteSessionActive);
 }
 
@@ -312,9 +315,28 @@ function popupDeleteSessionActive() {
 
 const btnClosePopup = document.querySelectorAll('.popup__dismiss');
 btnClosePopup.forEach(el => {
-    el.addEventListener('click',(event)=>{
+    el.addEventListener('click', (event) => {
         // console.log(event.target.closest('.popup'));
         event.target.closest('.popup').classList.remove('active');
     })
 });
 
+//Функция открытия попапа "Удалить фильм"
+function openPopupDeleteFilm(event) {
+    const wrpFilm = event.target.closest('.conf-step__movie');
+    //Получаем id кликнутого фильма
+    const idFilm = wrpFilm.getAttribute('data-film-id');
+    //Берем имя фильмы
+    const nameFilm = wrpFilm.querySelector('.conf-step__movie-title').textContent;
+    console.log(idFilm, nameFilm);
+
+     //Вписываем название фильма в попап "Удалить фильм" "Вы действительно хотите удалить фильм "название фильма"?"
+     document.getElementById('nameFilmDelete').textContent = `"${nameFilm}"`;
+
+    //Заполняем id фильма в скрытом поле формы в папопе "Удалить фильм"
+    document.querySelector('input[name="idFilmDelete"]').value = idFilm;
+
+     //Открываем попап "Удалить фильм"
+    document.getElementById('delete-film').classList.add('active');
+
+}
