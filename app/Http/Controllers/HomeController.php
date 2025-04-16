@@ -21,11 +21,13 @@ class HomeController extends Controller
 
         $halls = Hall::all()->toArray();
 
-        //Добавляем в каждый элемент массива фильмов в каждый фильм поле залы со списком всех залов
+        //Добавляем в каждый элемент массива фильмов в каждый фильм поле 'залы' со списком всех залов
         foreach ($films as &$film) {
+
             $film['halls'] = $halls;
 
-            //Добавляем в каждый элемент массива залы поле сеансов
+            //Добавляем в каждый элемент массива залы поле 'сеансов'
+            //Берем только те сеансы, которые содержат id фильмы, id зала, и дату (сегодняшнюю), переделываем в массив и вовзращаем
             foreach ($film['halls'] as &$hall) {
                 $hall['sessions'] = Session::
                 where('film_id',  $film['id']) 
@@ -36,8 +38,6 @@ class HomeController extends Controller
             }
 
         }
-
-
 
      // dd($films, $halls);
 
