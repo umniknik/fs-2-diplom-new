@@ -25,4 +25,10 @@ class Hall extends Model
       return $this->hasMany(Session::class); // один зал может иметь несколько сеансов
    }
 
+   //Устнавливаем связсь через таблицу filmsessions чтобы возвращать конкретному залу все фильмы, которые в нем проходят (для главной страницы)
+   public function films()
+   {
+       return $this->belongsToMany(Film::class, 'film_sessions', 'hall_id', 'film_id');
+   }
+
 }

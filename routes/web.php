@@ -2,14 +2,17 @@
 
 use App\Http\Controllers\FilmController;
 use App\Http\Controllers\HallController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SeatController;
 use App\Http\Controllers\PricesController;
 use App\Http\Controllers\SessionController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('index');
-});
+// Route::get('/', function () {
+//     return view('index');
+// });
+
+Route::get('/', [HomeController::class, 'index']);
 
 Route::get('hall', function() {
     return view('hall');
@@ -71,4 +74,8 @@ Route::post('/delete-session', [SessionController::class, 'deleteSession']);
 
 //Маршрут Удаление фильма 
 Route::post('delete-film',[FilmController::class, 'deleteFilm']);
+// Route::delete('/delete-film/{film}', [FilmController::class, 'destroy'])->name('film.destroy');
+
+//Маршрут загрузки всех фильмов на главную страницу
+Route::post('/',[FilmController::class, 'allFilm']);
 // Route::delete('/delete-film/{film}', [FilmController::class, 'destroy'])->name('film.destroy');
