@@ -6,8 +6,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>ИдёмВКино</title>
-  <link rel="stylesheet" href="css/normalize.css">
-  <link rel="stylesheet" href="css/styles.css">
+  <!-- <link rel="stylesheet" href="css/normalize.css"> -->
+  <!-- <link rel="stylesheet" href="css/styles.css"> -->
+  <link rel="stylesheet" href="{{ asset('css/normalize.css') }}">
+  <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
   <link
     href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900&amp;subset=cyrillic,cyrillic-ext,latin-ext"
     rel="stylesheet">
@@ -19,7 +21,7 @@
   </header>
 
   <nav class="page-nav">
-    <a class="page-nav__day page-nav__day_today" href="#">
+    <!-- <a class="page-nav__day page-nav__day_today" href="#">
       <span class="page-nav__day-week">Пн</span><span class="page-nav__day-number">31</span>
     </a>
     <a class="page-nav__day" href="#">
@@ -38,7 +40,7 @@
       <span class="page-nav__day-week">Сб</span><span class="page-nav__day-number">5</span>
     </a>
     <a class="page-nav__day page-nav__day_next" href="#">
-    </a>
+    </a> -->
   </nav>
 
   <main>
@@ -47,7 +49,7 @@
     <section class="movie">
       <div class="movie__info">
         <div class="movie__poster">
-          <img class="movie__poster-image" alt="Звёздные войны постер" src="{{ $film['img_url'] }}">
+          <img class="movie__poster-image" alt="Звёздные войны постер" src="{{ asset($film['img_url']) }}">
         </div>
         <div class="movie__description">
           <h2 class="movie__title">{{ $film['name'] }}</h2>
@@ -193,6 +195,8 @@
       </div>
     </section> -->
   </main>
+
+  <script src="{{ asset('js/top_date_menu.js') }}"></script>
 
 </body>
 

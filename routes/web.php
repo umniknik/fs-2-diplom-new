@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::get('/', [HomeController::class, 'index']);
+//Маршрут загрузки фильмов на главной по датам
+Route::get('/movies/{data}', [HomeController::class, 'filmsByDate']);
 
 Route::get('hall', function() {
     return view('hall');
@@ -79,3 +81,4 @@ Route::post('delete-film',[FilmController::class, 'deleteFilm']);
 //Маршрут загрузки всех фильмов на главную страницу
 Route::post('/',[FilmController::class, 'allFilm']);
 // Route::delete('/delete-film/{film}', [FilmController::class, 'destroy'])->name('film.destroy');
+
