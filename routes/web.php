@@ -3,6 +3,7 @@
 use App\Http\Controllers\FilmController;
 use App\Http\Controllers\HallController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\SeatController;
 use App\Http\Controllers\PricesController;
 use App\Http\Controllers\SessionController;
@@ -13,12 +14,17 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::get('/', [HomeController::class, 'index']);
+
 //Маршрут загрузки фильмов на главной по датам
 Route::get('/movies/{data}', [HomeController::class, 'filmsByDate']);
 
-Route::get('hall', function() {
-    return view('hall');
-} );
+//Маршрут перехода на страницу выбора мест в зале после клика по сеансу
+Route::get('hall/{hallId}/{sessionId}', [OrderController::class, 'showHall']);
+
+
+// Route::get('hall', function() {
+//     return view('hall');
+// } );
 
 Route::get('payment', function() {
     return view('payment');

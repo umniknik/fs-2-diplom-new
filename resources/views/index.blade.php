@@ -73,7 +73,12 @@
 
               <!-- Отрисовываем все сеансы -->
               @foreach ($hall['sessions'] as $session)
-                <li class="movie-seances__time-block"><a class="movie-seances__time" href="hall.html">{{$session['start_time']}}</a></li>
+                <li class="movie-seances__time-block">
+                  <a class="movie-seances__time" href="/hall/{{ $hall['id'] }}/{{ $session['id'] }}" 
+                     data-info='{"session_id": "{{ $session['id'] }}", "hall_id": "{{ $hall['id'] }}"}'
+                    >{{$session['start_time']}}                  
+                  </a>
+                </li>
               @endforeach
 
             </ul>
@@ -201,3 +206,12 @@
 </body>
 
 </html>
+
+<!-- @foreach ($hall['sessions'] as $session)
+                <li class="movie-seances__time-block">
+                  <a class="movie-seances__time" href="hall" 
+                     data-info='{"session_id": "{{ $session['id'] }}", "hall_id": "{{ $hall['id'] }}"}'
+                    >{{$session['start_time']}}                  
+                  </a>
+                </li>
+              @endforeach -->
