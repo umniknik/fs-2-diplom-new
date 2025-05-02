@@ -440,3 +440,10 @@ body {
 .hide {
   display: none;
 }
+
+.ticket__info-wrapper svg {
+  display: block;
+  margin: 3rem auto 0;
+  width: 20rem;
+  height: 20rem;
+}

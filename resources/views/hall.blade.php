@@ -52,16 +52,16 @@
           @foreach ( $filmInfo['seatsNew'] as $row)
             <div class="buying-scheme__row">
               @foreach ($row as $seat )
-                {{ $seat['id'] }}
-                <span class="buying-scheme__chair {{$classChair($seat['type'])}}"></span>
+                
+                <span class="buying-scheme__chair {{$classChair($seat['type'])}}" data-seat-id='{{ $seat['id'] }}'></span>
               @endforeach
             </div>
           @endforeach
 
         <div class="buying-scheme__legend">
           <div class="col">
-            <p class="buying-scheme__legend-price"><span class="buying-scheme__chair buying-scheme__chair_standart"></span> Свободно (<span class="buying-scheme__legend-value">250</span>руб)</p>
-            <p class="buying-scheme__legend-price"><span class="buying-scheme__chair buying-scheme__chair_vip"></span> Свободно VIP (<span class="buying-scheme__legend-value">350</span>руб)</p>            
+            <p class="buying-scheme__legend-price"><span class="buying-scheme__chair buying-scheme__chair_standart"></span> Свободно (<span class="buying-scheme__legend-value">{{ $filmInfo['priceRegular'] }}</span>руб)</p>
+            <p class="buying-scheme__legend-price"><span class="buying-scheme__chair buying-scheme__chair_vip"></span> Свободно VIP (<span class="buying-scheme__legend-value">{{ $filmInfo['priceVip'] }}</span>руб)</p>            
           </div>
           <div class="col">
             <p class="buying-scheme__legend-price"><span class="buying-scheme__chair buying-scheme__chair_taken"></span> Занято</p>
@@ -69,10 +69,18 @@
           </div>
         </div>
       </div>
-      <button class="acceptin-button" onclick="location.href='payment.html'" >Забронировать</button>
+      <form action="/payment">
+              @csrf
+              <input type="hidden" name="idHall" value="{{ $filmInfo['idHall'] }}">
+              <input type="hidden" name="idSession" value="{{ $filmInfo['idSession'] }}">
+              <input type="hidden" name="orderSeats" value="">
+              <button class="acceptin-button">Забронировать</button>
+      </form>
     </section>     
   </main>
-  
+
+<script src="{{ asset('js/order_hall.js') }}"></script>
+
 </body>
 </html>
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Price;
 use App\Models\Seat;
 use App\Models\Session;
 use Illuminate\Http\Request;
@@ -42,25 +43,21 @@ class OrderController extends Controller
         //Получаем название фильма
         $filmName = $seans->film->name;
 
+        //Получаем стоимость мест
+        $priceRegular = Price::where('hall_id', $idHall)->where('type', 'regular')->first()->price;
+        $priceVip = Price::where('hall_id', $idHall)->where('type', 'vip')->first()->price;
+
         //Формируем переменную со всеми данными о сеансе, местах и фильме для отправки в представление 
         $filmInfo = [
             'seatsNew' => $seatsNew,
+            'idSession' =>  $idSession,
             'idHall' => $idHall,
             'timeSeans' => $timeSeans,
             'filmName' => $filmName,
+            'priceRegular' => $priceRegular,
+            'priceVip' => $priceVip,
         ];
 
         return view('hall', compact('filmInfo'));
-        //   return response()->json($seats);
     }
-    // return view('admin.index', compact('halls'));
 }
-
-// "id" => 24
-// "row_number" => 4
-// "seats_number" => 6
-// "type" => "regular"
-// "price" => null
-// "hall_id" => 1
-// "created_at" => "2025-03-18T16:16:19.000000Z"
-// "updated_at" => "2025-03-18T16:16:19.000000Z"
