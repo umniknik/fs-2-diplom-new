@@ -10,15 +10,18 @@ seats.forEach(seat => {
 
 //Функция изменения цвета выбранного места
 function orderSeat(event) {
-    console.log(event.target);
-    //Изменяем цвет у выбранног места
-    event.target.classList.toggle('buying-scheme__chair_selected');
+    // console.log(event.target);
+    //Проверяем на куплено ли место
+    if (!event.target.classList.contains('buying-scheme__chair_taken')) {
+        //Изменяем цвет у выбранног места
+        event.target.classList.toggle('buying-scheme__chair_selected');
 
-    //Сохраняем в массив номера всех выбранных мест с помощью ф-ии chekAllSeatsByOrder
-    const arrOrderSeats = chekAllSeatsByOrder();
+        //Сохраняем в массив номера всех выбранных мест с помощью ф-ии chekAllSeatsByOrder
+        const arrOrderSeats = chekAllSeatsByOrder();
 
-    //Вписываем выбарные места в скрытое поле формы
-    document.querySelector('input[name="orderSeats"]').value = arrOrderSeats;
+        //Вписываем выбарные места в скрытое поле формы
+        document.querySelector('input[name="orderSeats"]').value = arrOrderSeats;
+    }
 }
 
 //Проверяем все места на то выбарны они или нет

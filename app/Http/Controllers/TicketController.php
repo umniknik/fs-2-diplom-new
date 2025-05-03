@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Ticket;
 use Illuminate\Http\Request;
 
 class TicketController extends Controller
@@ -18,6 +19,7 @@ class TicketController extends Controller
         //Получаем места в виде строки
         $orderSeats = $request->input('orderSeats');
 
+        //Переменная для передачи в представление на страницу ticket
         $ticketInfo = [
             'idHall' => $idHall,
             'orderSeats' => $orderSeats,
@@ -25,6 +27,23 @@ class TicketController extends Controller
             'filmName' => $filmName,
             'ticketCost' => $ticketCost,
         ];
+
+        //Переделываем строку мест в массив
+        $arrSeatsOrderStr = explode(',', $orderSeats);
+        //Приводим элементы мыссива из строк в числа
+        $arrSeatsOrder = array_map('intval', $arrSeatsOrderStr);
+
+        //Проходимся по каждому заказанному месту и создаем запись в таблице билетов
+        foreach ($arrSeatsOrder as $idSeat) {
+            //Создаем новую запись в таблице билетов
+            $ticket = new Ticket();
+            $ticket->user_id = 1;
+            $ticket->film_sessions_id = $idSession;
+            $ticket->seat_id = $idSeat;
+            $ticket->paid = true;
+
+            $ticket->save();
+        };
 
         // dd($ticketInfo);
 

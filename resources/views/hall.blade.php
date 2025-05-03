@@ -40,6 +40,8 @@
                 return 'buying-scheme__chair_disabled';
               case 'vip':
                 return 'buying-scheme__chair_vip';
+              case 'buying':
+                return 'buying-scheme__chair_taken';
               default:
                 return 'buying-scheme__chair_standart';
             }
