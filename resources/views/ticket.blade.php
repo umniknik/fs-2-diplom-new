@@ -38,17 +38,9 @@
 
         <div class="ticket__info-wrapper">
 
-            <?php echo QrCode::generate("
-              Film: nazvanie
-              Mesta: " . preg_replace('/,/', ', ', $ticketInfo['orderSeats']) . "
-              Zal: {$ticketInfo['idHall']}
-              Nachalo seansa: {$ticketInfo['timeSeans']}
-            "); ?>
-          
+          <img class="ticket__info-qr" src=""> 	
+
         </div>
-
-        <!-- <img class="ticket__info-qr" src="{!! QrCode::generate('http://jobtools.ru') !!}"> 	 -->
-
 
         <p class="ticket__hint">Покажите QR-код нашему контроллеру для подтверждения бронирования.</p>
         <p class="ticket__hint">Приятного просмотра!</p>
