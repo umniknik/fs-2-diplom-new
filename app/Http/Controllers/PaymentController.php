@@ -9,6 +9,16 @@ use Illuminate\Http\Request;
 
 class PaymentController extends Controller
 {
+     /**
+     * Перенаправление на авторизацию.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     //Метод отображения заказа на старнице payment
     public function showOrder(Request $request)
     {

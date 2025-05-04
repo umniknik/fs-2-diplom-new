@@ -13,11 +13,26 @@
   <link
     href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900&amp;subset=cyrillic,cyrillic-ext,latin-ext"
     rel="stylesheet">
+  <!-- Fonts -->
+  <link rel="dns-prefetch" href="//fonts.bunny.net">
+  <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
+
+  <!-- Scripts -->
+  @viteReactRefresh
+  @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
 
 <body>
+  <div style="width: 990px; margin: auto;">
+    <!-- Подключаем блок авторизации  -->
+    @include('layouts/loginInHead')
+  </div>
+
+
   <header class="page-header">
-    <a href="/" style="text-decoration: none;"><h1 class="page-header__title">Идём<span>в</span>кино</h1></a>
+    <a href="/" style="text-decoration: none;">
+      <h1 class="page-header__title">Идём<span>в</span>кино</h1>
+    </a>
   </header>
 
   <nav class="page-nav">
@@ -45,48 +60,47 @@
 
   <main>
 
-  @foreach ($films as $film)
+    @foreach ($films as $film)
     <section class="movie">
       <div class="movie__info">
-        <div class="movie__poster">
-          <img class="movie__poster-image" alt="Звёздные войны постер" src="{{ asset($film['img_url']) }}">
-        </div>
-        <div class="movie__description">
-          <h2 class="movie__title">{{ $film['name'] }}</h2>
-          <p class="movie__synopsis">{{ $film['description'] }}</p>
-          <p class="movie__data">
-          <span class="movie__data-duration">{{ $film['duration'] }}</span>
-          <span class="movie__data-origin">США</span>
-          </p>
-        </div>
+      <div class="movie__poster">
+        <img class="movie__poster-image" alt="Звёздные войны постер" src="{{ asset($film['img_url']) }}">
       </div>
-      
-      
+      <div class="movie__description">
+        <h2 class="movie__title">{{ $film['name'] }}</h2>
+        <p class="movie__synopsis">{{ $film['description'] }}</p>
+        <p class="movie__data">
+        <span class="movie__data-duration">{{ $film['duration'] }}</span>
+        <span class="movie__data-origin">США</span>
+        </p>
+      </div>
+      </div>
+
+
       <!-- Перебираем все залы и отрисовываем -->
       @foreach ($film['halls'] as $hall)
-        <!-- Если в зале нет сеансов, то не не отображаем  -->
-        @if(!empty($hall['sessions']))
+      <!-- Если в зале нет сеансов, то не не отображаем  -->
+      @if(!empty($hall['sessions']))
 
-          <div class="movie-seances__hall">
-            <h3 class="movie-seances__hall-title">{{ $hall['name'] }}</h3>
-            <ul class="movie-seances__list">
+      <div class="movie-seances__hall">
+      <h3 class="movie-seances__hall-title">{{ $hall['name'] }}</h3>
+      <ul class="movie-seances__list">
 
-              <!-- Отрисовываем все сеансы -->
-              @foreach ($hall['sessions'] as $session)
-                <li class="movie-seances__time-block">
-                  <a class="movie-seances__time" href="/hall/{{ $hall['id'] }}/{{ $session['id'] }}" 
-                     data-info='{"session_id": "{{ $session['id'] }}", "hall_id": "{{ $hall['id'] }}"}'
-                    >{{$session['start_time']}}                  
-                  </a>
-                </li>
-              @endforeach
-
-            </ul>
-          </div>   
-
-        @endif
-
+      <!-- Отрисовываем все сеансы -->
+      @foreach ($hall['sessions'] as $session)
+      <li class="movie-seances__time-block">
+      <a class="movie-seances__time" href="/hall/{{ $hall['id'] }}/{{ $session['id'] }}"
+      data-info='{"session_id": "{{ $session['id'] }}", "hall_id": "{{ $hall['id'] }}"}'>{{$session['start_time']}}
+      </a>
+      </li>
       @endforeach
+
+      </ul>
+      </div>
+
+    @endif
+
+    @endforeach
     </section>
   @endforeach
 

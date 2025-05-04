@@ -1,7 +1,10 @@
 /**
- * Файо отвечает за добавление функций выбора и заказа  мест на старницу hall
+ * Файл отвечает за добавление функций выбора и заказа  мест на старницу hall
  */
 const seats = document.querySelectorAll('.buying-scheme__chair');
+
+//Запускаем функцию, которая делает кнопку забронировать неактивной, если не выбраны места
+chechForButton();
 
 //На кажде сиденье вешаем слушатель для изменения цвета выбранного места
 seats.forEach(seat => {
@@ -22,6 +25,9 @@ function orderSeat(event) {
         //Вписываем выбарные места в скрытое поле формы
         document.querySelector('input[name="orderSeats"]').value = arrOrderSeats;
     }
+
+    //Запускаем функцию, которая делает кнопку забронировать неактивной/активной, если (не) выбраны места
+    chechForButton();
 }
 
 //Проверяем все места на то выбарны они или нет
@@ -39,4 +45,22 @@ function chekAllSeatsByOrder() {
     });
 
     return orderSeats;
+}
+
+//Проверка выбраны ли места что сделать кнопку "ЗАБРОНИРОВАТь" активной/неактивной
+function chechForButton() {
+    //Берем кнопку "ЗАБРОНИРОВАТь"
+    const button = document.querySelector('.acceptin-button');
+
+    //Берем выбарные места из скрытого поле формы
+    const arrOrderSeats = document.querySelector('input[name="orderSeats"]').value;
+
+    //Если в скрытом поле были места до удаляем класс невидимости, иначе наоборот
+    if (arrOrderSeats) {
+        button.classList.remove('button_disabled');
+        button.disabled = false; // активируем кнопку
+    } else {
+        button.classList.add('button_disabled');
+        button.disabled = true; // деактивируем кнопку
+    }
 }

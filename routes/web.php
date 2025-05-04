@@ -86,3 +86,7 @@ Route::post('delete-film',[FilmController::class, 'deleteFilm']);
 Route::post('/',[FilmController::class, 'allFilm']);
 // Route::delete('/delete-film/{film}', [FilmController::class, 'destroy'])->name('film.destroy');
 
+
+Auth::routes();
+
+//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

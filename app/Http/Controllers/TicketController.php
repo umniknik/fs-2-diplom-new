@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Ticket;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TicketController extends Controller
 {
@@ -33,17 +34,21 @@ class TicketController extends Controller
         //Приводим элементы мыссива из строк в числа
         $arrSeatsOrder = array_map('intval', $arrSeatsOrderStr);
 
+        //Получаем id авторизованного пользователя
+        $user_id = Auth::id();
+
         //Проходимся по каждому заказанному месту и создаем запись в таблице билетов
         foreach ($arrSeatsOrder as $idSeat) {
             //Создаем новую запись в таблице билетов
             $ticket = new Ticket();
-            $ticket->user_id = 1;
+            $ticket->user_id = $user_id;
             $ticket->film_sessions_id = $idSession;
             $ticket->seat_id = $idSeat;
             $ticket->paid = true;
 
             $ticket->save();
-        };
+        }
+        ;
 
         // dd($ticketInfo);
 
