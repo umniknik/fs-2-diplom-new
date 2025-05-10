@@ -131,8 +131,8 @@
                             </label>
                             <label class="conf-step__label conf-step__label-fullsize" for="name">
                                 Продолжительность фильма (мин.)
-                                <input class="conf-step__input" type="text" name="durationFilm" data-last-value=""
-                                    required>
+                                <input class="conf-step__input" type="number" name="durationFilm" data-last-value=""
+                                    min="1" max="500" step="1" required>
                             </label>
                             <label class="conf-step__label conf-step__label-fullsize" for="name">
                                 Описание фильма

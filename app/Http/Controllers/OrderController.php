@@ -1,10 +1,13 @@
 <?php
-
+/**
+ * Этот контроллер отвечает за страницу заказа мест в зале  - стр /hall
+ */
 namespace App\Http\Controllers;
 
 use App\Models\Price;
 use App\Models\Seat;
 use App\Models\Session;
+use App\Models\Setting;
 use App\Models\Ticket;
 use Illuminate\Http\Request;
 
@@ -60,7 +63,9 @@ class OrderController extends Controller
             }
         }
 
-        // dd($seatsNew);
+        //Проверяем нажата ли кнопка "Открыть продажу билетов" в таблице settings специальное поле для этого
+        $hallIsActive = Setting::where('id', '1')->first()->halls_is_active;
+        // dd($hallIsActive);
 
         //Формируем переменную со всеми данными о сеансе, местах и фильме для отправки в представление 
         $filmInfo = [
@@ -72,6 +77,7 @@ class OrderController extends Controller
             'priceRegular' => $priceRegular,
             'priceVip' => $priceVip,
             'buyingSeats' => $buyingSeats,
+            'hallIsActive' => $hallIsActive
         ];
 
         // dd($buyingSeats , $seatsNew);

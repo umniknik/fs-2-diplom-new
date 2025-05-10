@@ -19,9 +19,9 @@
             </ul>
             <p class="conf-step__paragraph">Укажите количество рядов и максимальное количество кресел в ряду:</p>
             <div class="conf-step__legend">
-                <label class="conf-step__label">Рядов, шт<input type="text" class="conf-step__input" placeholder="10" name="rows"></label>
+                <label class="conf-step__label">Рядов, шт<input type="number" class="conf-step__input" placeholder="10" name="rows" min="1" max="100" step="1" required></label>
                 <span class="multiplier">x</span>
-                <label class="conf-step__label">Мест, шт<input type="text" class="conf-step__input" placeholder="8" name="seats_per_row"></label>
+                <label class="conf-step__label">Мест, шт<input type="number" class="conf-step__input" placeholder="8" name="seats_per_row" min="1" max="100" step="1" required></label>
             </div>
             <p class="conf-step__paragraph">Теперь вы можете указать типы кресел на схеме зала:</p>
             <div class="conf-step__legend">

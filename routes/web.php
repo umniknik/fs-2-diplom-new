@@ -8,6 +8,7 @@ use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\SeatController;
 use App\Http\Controllers\PricesController;
 use App\Http\Controllers\SessionController;
+use App\Http\Controllers\SettingController;
 use App\Http\Controllers\TicketController;
 use Illuminate\Support\Facades\Route;
 
@@ -81,6 +82,12 @@ Route::post('/delete-session', [SessionController::class, 'deleteSession']);
 //Маршрут Удаление фильма 
 Route::post('delete-film',[FilmController::class, 'deleteFilm']);
 // Route::delete('/delete-film/{film}', [FilmController::class, 'destroy'])->name('film.destroy');
+
+//Маршрут для получения значения открыта ли продажа билетов
+Route::get('/api/halls-is-active', [SettingController::class, 'hallsIsActive']);
+
+//Маршрут изменения значения, чтобы открыть или закрыть продажу билетов
+Route::post('/api/halls-is-active', [SettingController::class, 'changeHallsIsActive']);
 
 //Маршрут загрузки всех фильмов на главную страницу
 Route::post('/',[FilmController::class, 'allFilm']);

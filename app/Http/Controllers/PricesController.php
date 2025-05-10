@@ -10,10 +10,22 @@ class PricesController extends Controller
     //Медо создания/обнолвения цен на места в зале
     public function createPrices(Request $request)
     {//dd($request->input());
+        //Проверяем входящие данные
+        $validatedDate = $request->validate([
+            'prices-hall' => ['required', 'integer'],
+            'priceForRegularChair' => ['required', 'numeric', 'gt:0'],
+            'priceForVipChair' => ['required', 'numeric', 'gt:0']
+        ]);
+
         //Берем переданные значения из запроса
-        $idHall = $request->input('prices-hall');
-        $priceRegular = $request->input('priceForRegularChair');
-        $priceVip = $request->input('priceForVipChair');
+        $idHall = $validatedDate['prices-hall'];
+        $priceRegular = $validatedDate['priceForRegularChair'];
+        $priceVip = $validatedDate['priceForVipChair'];
+
+        // //Берем переданные значения из запроса
+        // $idHall = $request->input('prices-hall');
+        // $priceRegular = $request->input('priceForRegularChair');
+        // $priceVip = $request->input('priceForVipChair');
 
         //Проверяем есть ли уже запись в этом зале с типом regular
         $checkRegularFromTable = Price::where('hall_id', $idHall)->where('type', 'regular')->first();
