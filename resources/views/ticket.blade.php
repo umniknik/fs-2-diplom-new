@@ -20,7 +20,14 @@
 
         <div class="ticket__info-wrapper">
 
-          <img class="ticket__info-qr" src=""> 	
+          <!-- <img class="ticket__info-qr" src=""> 	 -->
+          	
+          <?php echo QrCode::encoding('UTF-8')->generate("
+              Фильм: {$ticketInfo['filmName']}
+              Места: " . preg_replace('/,/', ', ', $ticketInfo['orderSeats']) . "
+              В зале: {$ticketInfo['idHall']}
+              Начало сеанса: {$ticketInfo['timeSeans']}
+            "); ?>
 
         </div>
 
